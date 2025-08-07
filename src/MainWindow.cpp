@@ -151,7 +151,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
                     PostMessage(hWnd, WM_APP_ADD_ITEM, 0, (LPARAM)r);
                 }
-                SetWindowTextW(hWnd, (std::wstring(L"Argus Scanner - Loaded: ") + PathFindFileNameW(filename)).c_str());
+                SetWindowTextW(hWnd, (std::wstring(L"Argus Scan - Loaded: ") + PathFindFileNameW(filename)).c_str());
                 EnableWindow(g_hStartBtn, FALSE); EnableWindow(g_hAttachBtn, TRUE); EnableWindow(g_hStopBtn, FALSE);
             }
             break;
@@ -208,14 +208,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         if (g_hTargetProcess) {
             GetModuleBaseNameW(g_hTargetProcess, NULL, g_wszTargetProcessName, MAX_PATH);
             wchar_t newTitle[MAX_PATH + 50];
-            swprintf_s(newTitle, L"Argus Scanner - Attached to %s (PID: %d)", g_wszTargetProcessName, g_dwTargetPid);
+            swprintf_s(newTitle, L"Argus Scan - Attached to %s (PID: %d)", g_wszTargetProcessName, g_dwTargetPid);
             SetWindowTextW(hWnd, newTitle);
             EnableWindow(g_hStartBtn, TRUE); EnableWindow(g_hShowMapBtn, TRUE); EnableWindow(g_hAttachBtn, TRUE); EnableWindow(g_hStopBtn, FALSE);
             EnableWindow(g_hThreadsBtn, TRUE); EnableWindow(g_hIatHooksBtn, TRUE); EnableWindow(g_hSaveBtn, TRUE); EnableWindow(g_hLoadBtn, TRUE);
         }
         else {
             MessageBoxW(hWnd, L"Failed to open the selected process. Try running as administrator.", L"Error", MB_OK | MB_ICONERROR);
-            SetWindowTextW(hWnd, L"Argus Scanner - Not Attached");
+            SetWindowTextW(hWnd, L"Argus Scan - Not Attached");
             EnableWindow(g_hStartBtn, FALSE); EnableWindow(g_hShowMapBtn, FALSE);
             EnableWindow(g_hThreadsBtn, FALSE); EnableWindow(g_hIatHooksBtn, FALSE); EnableWindow(g_hSaveBtn, FALSE);
         }
@@ -259,4 +259,5 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         return DefWindowProc(hWnd, msg, wParam, lParam);
     }
     return 0;
+
 }
